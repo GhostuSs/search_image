@@ -7,15 +7,15 @@ class RawCard extends StatelessWidget{
   final String textDown;
   final onPressedUp;
   final onPressedDown;
-  final IconData iconUp;
-  final IconData iconDown;
+  final Widget iconUp;
+  final Widget iconDown;
 
   const RawCard({this.onPressedUp, this.onPressedDown, required this.iconUp, required this.iconDown, required this.textUp, required this.textDown});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.only(bottom: 15),
+        padding: const EdgeInsets.only(bottom: 30,left: 10,right: 10),
         child: Container(
           width: double.infinity,
           decoration: BoxDecoration(
@@ -33,31 +33,8 @@ class RawCard extends StatelessWidget{
                   child: Row(
                     children: [
                       Padding(
-                          padding: const EdgeInsets.only(left: 20,right: 15,top: 20,bottom: 20),
-                          child: iconUp==Icons.share_rounded
-                              ? Container(
-                            padding: const EdgeInsets.all(1),
-                            width: 24,
-                            height: 24,
-                            decoration: BoxDecoration(
-                                color: ProjectColors.white.withOpacity(0.8),
-                                borderRadius: BorderRadius.circular(3)
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [Icon(
-                                iconUp,
-                                color: ProjectColors.white.withOpacity(0.8),
-                                size: 22,
-                              )],
-                            ),
-                          )
-                              : Icon(
-                            iconUp,
-                            color: ProjectColors.white.withOpacity(0.9),
-                            size: 24,
-                          )
+                          padding: const EdgeInsets.only(left: 20,right: 15,top: 10,bottom: 10),
+                          child: iconUp
                       ),
                       Text(
                           textUp,
@@ -91,32 +68,9 @@ class RawCard extends StatelessWidget{
                   child: Row(
                     children: [
                       Padding(
-                          padding: const EdgeInsets.only(left: 20,right: 15,top: 20,bottom: 20),
-                          child: iconDown==Icons.share_rounded
-                              ? Container(
-                            padding: const EdgeInsets.all(1),
-                            width: 24,
-                            height: 24,
-                            decoration: BoxDecoration(
-                                color: ProjectColors.white.withOpacity(0.8),
-                                borderRadius: BorderRadius.circular(3)
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [Icon(
-                                iconDown,
-                                color: Color(0xCC210741).withOpacity(0.8),
-                                size: 22,
-                              )],
-                            ),
-                          )
-                              : Icon(
-                            iconDown,
-                            color: ProjectColors.white.withOpacity(0.9),
-                            size: 24,
-                          )
-                      ),
+                          padding: const EdgeInsets.only(left: 20,right: 15,top: 10,bottom: 10),
+                          child: iconDown,
+                          ),
                       Text(
                           textDown,
                           style: TextStyle(
