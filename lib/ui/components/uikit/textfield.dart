@@ -26,7 +26,7 @@ class _RawTextFieldState extends State<RawTextField>{
 
   void _onFocusChange(){
     setState(() {
-      _focus.hasFocus&&widget.textFieldController.text.isNotEmpty
+      widget.textFieldController.text.isNotEmpty
       ? iconColor=ProjectColors.blue
           : iconColor=ProjectColors.textLightGray;
     });
@@ -53,14 +53,17 @@ class _RawTextFieldState extends State<RawTextField>{
                 hintText: widget.hint,
                 suffixIcon: Padding(
                   padding: EdgeInsets.all(5),
-                  child: Container(
-                    width: 32,
-                    height: 32,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: iconColor
-                    ),
-                    child: Image.asset(AppIcons.search,filterQuality: FilterQuality.high,),),
+                  child: InkWell(
+                    onTap: ()=>print('pressed'),
+                    child: Container(
+                      width: 32,
+                      height: 32,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: iconColor
+                      ),
+                      child: Image.asset(AppIcons.search,filterQuality: FilterQuality.high,),),
+                  ),
                 )
               ),
               cursorHeight: 25,

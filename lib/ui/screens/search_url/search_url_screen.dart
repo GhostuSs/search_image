@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_search_app/project_settings/typography/app_typography.dart';
 import 'package:image_search_app/ui/components/uikit/appbar.dart';
 import 'package:image_search_app/ui/components/uikit/textfield.dart';
 
@@ -35,9 +36,19 @@ class _SearchUrlScreenState extends State<SearchUrlScreen>{
         ),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 40),
-
+          const SizedBox(height: 40),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+            child: Text('Insert link to start search',
+            style: TextStyle(
+              fontWeight: FontWeight.w300,
+              color: Colors.white,
+              fontSize: 18,
+              fontFamily: 'Montserrat'
+            ),),
+          ),
           RawTextField(
               textFieldController: searchController,
               onChanged: (value){
