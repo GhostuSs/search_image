@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage>{
             ),
             textUp: 'Image URL',
             onPressedDown: (){debugPrint('History');},
-            onPressedUp: (){debugPrint('Image URL');},
+            onPressedUp: (){Navigator.pushNamed(context, MainNavigationRoutes.searchUrl);},
           ),
           RawCard(
             textDown: 'Settings',
