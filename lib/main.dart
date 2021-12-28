@@ -15,7 +15,6 @@ Future<void> main() async {
   seen = prefs.getBool("seen") ?? false;
   await prefs.setBool("seen", true);
   subscribe = prefs.getBool("subscribe") ?? false;
-  seen=false;
   runApp(const App());
 }
 
@@ -39,7 +38,7 @@ class _App extends State<App>{
             theme: ThemeData.dark(),
             color: ProjectColors.white,
             debugShowCheckedModeBanner: false,
-            initialRoute: seen ? '/' : "/onboarding" ,
+            initialRoute: seen ? MainNavigationRoutes.home : MainNavigationRoutes.onboarding ,
             routes: routes
         ));
   }

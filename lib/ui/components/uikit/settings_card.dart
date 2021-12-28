@@ -25,7 +25,7 @@ class RawCard extends StatelessWidget{
           child: Column(
             children: [
               InkWell(
-                borderRadius: BorderRadius.only(topLeft: const Radius.circular(8.0),topRight: Radius.circular(8.0)),
+                borderRadius: BorderRadius.only(topLeft: const Radius.circular(8.0),topRight: const Radius.circular(8.0)),
                 child: Card(
                   elevation: 0.0,
                   borderOnForeground: false,

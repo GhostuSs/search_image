@@ -1,9 +1,13 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:image_search_app/project_settings/colors/color_palette.dart';
+import 'package:image_search_app/routes.dart';
 import 'package:image_search_app/ui/components/uikit/appbar.dart';
 import 'package:image_search_app/ui/components/uikit/settings_card.dart';
 
+
 class HomePage extends StatefulWidget{
+  late final CameraDescription camera;
   @override
   State<StatefulWidget> createState() {
     return _HomePageState();
@@ -12,8 +16,15 @@ class HomePage extends StatefulWidget{
 
 class _HomePageState extends State<HomePage>{
 
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: ProjectColors.black,
       appBar: const InnerAppBar(automaticalyImplyLeading: false, title: 'Search',),
@@ -23,18 +34,22 @@ class _HomePageState extends State<HomePage>{
         children: [
           const SizedBox(height: 40,),
           RawCard(
-            textDown: 'Camera',
-            iconDown: const RawIcon(
-              icon: Icons.photo_camera_sharp,
-              backColor: Colors.purple,
-            ),
             iconUp: const RawIcon(
               icon: Icons.photo_outlined,
               backColor: Colors.green,
             ),
             textUp: 'Photo',
-            onPressedDown: (){print('phot');},
-            onPressedUp: (){print('cam');},
+            onPressedUp: (){print('phot');},
+            iconDown: const RawIcon(
+              icon: Icons.photo_camera_sharp,
+              backColor: Colors.purple,
+            ),
+            textDown: 'Camera',
+            onPressedDown: () async {
+
+              //Navigator.push(context,PageTransition(child: CameraScreen(camera:firstCamera), type: PageTransitionType.leftToRight));
+              },
+
           ),
           RawCard(
             textDown: 'History',
@@ -61,7 +76,7 @@ class _HomePageState extends State<HomePage>{
               backColor: Color(0xFF59A8D6),
             ),
             textUp: 'Search by words',
-            onPressedDown: (){debugPrint('Settings');},
+            onPressedDown: (){Navigator.pushNamed(context, MainNavigationRoutes.settings);},
             onPressedUp: (){debugPrint('SearchByWords');},
           )
         ],
