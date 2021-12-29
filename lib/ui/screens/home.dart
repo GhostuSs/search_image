@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage>{
             ),
             textUp: 'Search by words',
             onPressedDown: (){Navigator.pushNamed(context, MainNavigationRoutes.settings);},
-            onPressedUp: (){debugPrint('SearchByWords');},
+            onPressedUp: (){Navigator.pushNamed(context, MainNavigationRoutes.searchWords);},
           )
         ],
       ),

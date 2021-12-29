@@ -4,8 +4,9 @@ import 'package:image_search_app/project_settings/colors/color_palette.dart';
 import '../../../project_settings/images/icons.dart';
 
 class RawTextField extends StatefulWidget{
-  RawTextField({required this.textFieldController, required this.onChanged, this.hint});
+  RawTextField({required this.textFieldController, required this.onChanged, this.hint, required this.onSearchPressed});
   TextEditingController textFieldController;
+  final void Function() onSearchPressed;
   final void Function(String) onChanged;
   final String? hint;
 
@@ -54,7 +55,7 @@ class _RawTextFieldState extends State<RawTextField>{
                 suffixIcon: Padding(
                   padding: EdgeInsets.all(5),
                   child: InkWell(
-                    onTap: ()=>print('pressed'),
+                    onTap: widget.onSearchPressed,
                     child: Container(
                       width: 32,
                       height: 32,

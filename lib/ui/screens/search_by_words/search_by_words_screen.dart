@@ -1,22 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_search_app/ui/components/uikit/textfield.dart';
-
+import 'package:dio/dio.dart'; 
+import '../../../project_settings/api/api_controller.dart';
 import '../../../project_settings/colors/color_palette.dart';
 
-class SearchUrlScreen extends StatefulWidget{
-  const SearchUrlScreen({Key? key}) : super(key: key);
+class SearchWordsScreen extends StatefulWidget{
+  const SearchWordsScreen({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return _SearchUrlScreenState();
+    return _SearchWordsScreenState();
   }
 }
 
-class _SearchUrlScreenState extends State<SearchUrlScreen>{
+class _SearchWordsScreenState extends State<SearchWordsScreen>{
 
   TextEditingController searchController = TextEditingController();
-
+  final Dio dio=Dio();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,10 +27,10 @@ class _SearchUrlScreenState extends State<SearchUrlScreen>{
         leading: InkWell(
           onTap: ()=>Navigator.pop(context),
           child: Row(
-            children:const [
-            Icon(Icons.arrow_back_ios,color: CupertinoColors.systemBlue,size: 23,),
-              Text('Back',style: TextStyle(color: CupertinoColors.systemBlue),)
-            ]
+              children:const [
+                Icon(Icons.arrow_back_ios,color: CupertinoColors.systemBlue,size: 23,),
+                Text('Back',style: TextStyle(color: CupertinoColors.systemBlue),)
+              ]
           ),
         ),
       ),
@@ -39,19 +40,21 @@ class _SearchUrlScreenState extends State<SearchUrlScreen>{
           const SizedBox(height: 40),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-            child: Text('Insert link to start search',
-            style: TextStyle(
-              fontWeight: FontWeight.w300,
-              color: Colors.white,
-              fontSize: 18,
-              fontFamily: 'Montserrat'
-            ),),
+            child: Text('Image search by words',
+              style: TextStyle(
+                  fontWeight: FontWeight.w300,
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontFamily: 'Montserrat'
+              ),),
           ),
           RawTextField(
               textFieldController: searchController,
               onChanged: (value){
                 value=searchController.text;
-              }, onSearchPressed: () {
+              }, onSearchPressed: () async{
+                await Api().searchByWordsGoogle(searchController.text);
+                await Api().searchByWordsYandex(searchController.text);
           },
           )
         ],
