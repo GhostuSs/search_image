@@ -59,7 +59,7 @@ class _BrowserPageState extends State<BrowserPage> {
                   ],
                 ),
                 const SizedBox(height: 10),
-                WebViewPage()
+                WebViewPage(selector: null,)
               ],
             ),
           ),
