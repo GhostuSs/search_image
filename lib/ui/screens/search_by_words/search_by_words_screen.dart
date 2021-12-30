@@ -1,7 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_search_app/routes.dart';
 import 'package:image_search_app/ui/components/uikit/textfield.dart';
-import 'package:dio/dio.dart'; 
+import 'package:dio/dio.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 import '../../../project_settings/api/api_controller.dart';
 import '../../../project_settings/colors/color_palette.dart';
 
@@ -18,14 +22,16 @@ class _SearchWordsScreenState extends State<SearchWordsScreen>{
 
   TextEditingController searchController = TextEditingController();
   final Dio dio=Dio();
+  final Completer<WebViewController> _controller =
+  Completer<WebViewController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ProjectColors.black,
       appBar: CupertinoNavigationBar(
         backgroundColor: ProjectColors.darkGray,
-        leading: InkWell(
-          onTap: ()=>Navigator.pop(context),
+        leading: TextButton(
+          onPressed: ()=>Navigator.pop(context),
           child: Row(
               children:const [
                 Icon(Icons.arrow_back_ios,color: CupertinoColors.systemBlue,size: 23,),
@@ -55,9 +61,10 @@ class _SearchWordsScreenState extends State<SearchWordsScreen>{
               }, onSearchPressed: () async{
                 await Api().searchByWordsGoogle(searchController.text);
                 await Api().searchByWordsYandex(searchController.text);
+                Navigator.pushNamed(context, MainNavigationRoutes.browser);
           },
-          )
-        ],
+          ),
+            ],
       ),
     );
   }
