@@ -79,8 +79,6 @@ class _BrowserPageState extends State<BrowserPage> {
                     print(snapshot.connectionState);
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return Container(
-                        width: double.infinity,
-                        height: double.infinity,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,

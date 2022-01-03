@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:image_search_app/ui/components/uikit/textfield.dart';
 
 import '../../../project_settings/colors/color_palette.dart';
+import '../browser/browser_page.dart';
 
 class SearchUrlScreen extends StatefulWidget{
   const SearchUrlScreen({Key? key}) : super(key: key);
@@ -23,8 +24,8 @@ class _SearchUrlScreenState extends State<SearchUrlScreen>{
       backgroundColor: ProjectColors.black,
       appBar: CupertinoNavigationBar(
         backgroundColor: ProjectColors.darkGray,
-        leading: InkWell(
-          onTap: ()=>Navigator.pop(context),
+        leading: TextButton(
+          onPressed: ()=>Navigator.pop(context),
           child: Row(
             children:const [
             Icon(Icons.arrow_back_ios,color: CupertinoColors.systemBlue,size: 23,),
@@ -51,8 +52,10 @@ class _SearchUrlScreenState extends State<SearchUrlScreen>{
               textFieldController: searchController,
               onChanged: (value){
                 value=searchController.text;
-              }, onSearchPressed: () {
-          },
+              }, onSearchPressed: () async{
+              String url = searchController.text;
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext ctx)=>BrowserPage(urlGoogle: url,urlYandex: url,)));
+            },
           )
         ],
       ),
