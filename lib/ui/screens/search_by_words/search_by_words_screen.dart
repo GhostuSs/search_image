@@ -1,11 +1,9 @@
-import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:image_search_app/routes.dart';
 import 'package:image_search_app/ui/components/uikit/textfield.dart';
 import 'package:dio/dio.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:image_search_app/ui/screens/browser/browser_page.dart';
 import '../../../project_settings/api/api_controller.dart';
 import '../../../project_settings/colors/color_palette.dart';
 
@@ -22,8 +20,6 @@ class _SearchWordsScreenState extends State<SearchWordsScreen>{
 
   TextEditingController searchController = TextEditingController();
   final Dio dio=Dio();
-  final Completer<WebViewController> _controller =
-  Completer<WebViewController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,9 +55,9 @@ class _SearchWordsScreenState extends State<SearchWordsScreen>{
               onChanged: (value){
                 value=searchController.text;
               }, onSearchPressed: () async{
-                await Api().searchByWordsGoogle(searchController.text);
-                await Api().searchByWordsYandex(searchController.text);
-                Navigator.pushNamed(context, MainNavigationRoutes.browser);
+                String? urlGoogle = await Api().searchByWordsGoogle(searchController.text);
+                String? urlYandex = await Api().searchByWordsYandex(searchController.text);
+                Navigator.push(context, MaterialPageRoute(builder: (BuildContext ctx)=>BrowserPage(urlGoogle: urlGoogle,urlYandex: urlYandex,)));
           },
           ),
             ],
