@@ -1,10 +1,12 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_search_app/data/model/data/words_list_model.dart';
 import 'package:image_search_app/ui/components/uikit/ios_back_button.dart';
 import 'package:image_search_app/ui/components/uikit/textfield.dart';
 import 'package:dio/dio.dart';
 import 'package:image_search_app/ui/screens/browser/browser_page.dart';
+import 'package:provider/src/provider.dart';
 import '../../../project_settings/api/api_controller.dart';
 import '../../../project_settings/colors/color_palette.dart';
 
@@ -50,6 +52,7 @@ class _SearchWordsScreenState extends State<SearchWordsScreen>{
               }, onSearchPressed: () async{
                 String? urlGoogle = await Api().searchByWordsGoogle(searchController.text);
                 String? urlYandex = await Api().searchByWordsYandex(searchController.text);
+                await context.read<WordList>().addList(searchController.text);
                 Navigator.push(context, MaterialPageRoute(builder: (BuildContext ctx)=>BrowserPage(urlGoogle: urlGoogle,urlYandex: urlYandex,)));
           },
           ),
