@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:image_search_app/project_settings/api/routes/api_routes.dart';
-import 'package:http/http.dart' as http;
 import 'base_url.dart';
 import 'dart:io';
 
@@ -75,7 +74,6 @@ class Api{
   }
   Future<void> uploadImage(File file) async {
     String fileName = file.path.split('/').last;
-    print(fileName);
     FormData formData = FormData.fromMap({
       "file":
       await MultipartFile.fromFile(file.path, filename:fileName),
@@ -83,5 +81,8 @@ class Api{
       "api_key":'891219667978811',
       "upload_preset":'kuktu5xn'});
     await dio.post(BaseUrl.server, data: formData).then((response) => print(response.data));
+  }
+  Future<void> downloadImage() async {
+    await dio.get(BaseUrl.server).then((response) => print(response.data));
   }
 }

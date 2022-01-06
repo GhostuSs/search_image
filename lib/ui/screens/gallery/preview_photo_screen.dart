@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:image_search_app/project_settings/colors/color_palette.dart';
 import 'package:image_search_app/ui/components/uikit/appbar.dart';
 import 'dart:io';
-
 import 'package:image_search_app/ui/components/uikit/ios_back_button.dart';
-
 import '../../../project_settings/api/api_controller.dart';
-import '../../../project_settings/typography/app_typography.dart';
+
 class PreviewPhotoScreen extends StatefulWidget{
   const PreviewPhotoScreen({Key? key, required this.image}) : super(key: key);
 
@@ -32,14 +30,26 @@ class _PreviewPhotoScreenState extends State<PreviewPhotoScreen>{
         automaticalyImplyLeading: false,
         title: 'Gallery',
         backBtn: const IosBackBtn(),
-        actions: [TextButton(onPressed: () async {await Api().uploadImage(widget.image);}, child: const Text('Ok',style: TextStyle(color: CupertinoColors.systemBlue,fontSize: 18),))],
+        actions: [
+          TextButton(
+              onPressed: () async {
+                await Api().uploadImage(widget.image);
+                },
+              child: const Text(
+                'Ok',
+                style: TextStyle(
+                    color: CupertinoColors.systemBlue,
+                    fontSize: 18
+                ),
+              )
+          )
+        ],
 
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const SizedBox(height: 40,),
           Image.file(widget.image)
         ],
       ),
