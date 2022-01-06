@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_search_app/ui/components/uikit/ios_back_button.dart';
 import 'package:image_search_app/ui/components/uikit/textfield.dart';
 
 import '../../../project_settings/api/api_controller.dart';
@@ -23,17 +24,9 @@ class _SearchUrlScreenState extends State<SearchUrlScreen>{
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ProjectColors.black,
-      appBar: CupertinoNavigationBar(
+      appBar: const CupertinoNavigationBar(
         backgroundColor: ProjectColors.darkGray,
-        leading: TextButton(
-          onPressed: ()=>Navigator.pop(context),
-          child: Row(
-            children:const [
-            Icon(Icons.arrow_back_ios,color: CupertinoColors.systemBlue,size: 23,),
-              Text('Back',style: TextStyle(color: CupertinoColors.systemBlue),)
-            ]
-          ),
-        ),
+        leading: IosBackBtn(),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,8 +47,8 @@ class _SearchUrlScreenState extends State<SearchUrlScreen>{
               onChanged: (value){
                 value=searchController.text;
               }, onSearchPressed: () async{
-              String? urlGoogle = await Api().searchByImageGoogle(searchController.text);
-              String? urlYandex = await Api().searchByImageYandex(searchController.text);
+              String? urlGoogle = await Api().searchByUrlGoogle(searchController.text);
+              String? urlYandex = await Api().searchByUrlYandex(searchController.text);
               Navigator.push(context, MaterialPageRoute(builder: (BuildContext ctx)=>BrowserPage(urlGoogle: urlGoogle,urlYandex: urlYandex,)));
             },
           )

@@ -1,13 +1,14 @@
+import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:image_search_app/project_settings/colors/color_palette.dart';
 import 'package:image_search_app/routes.dart';
 import 'package:image_search_app/ui/components/uikit/appbar.dart';
 import 'package:image_search_app/ui/components/uikit/settings_card.dart';
-import 'package:page_transition/page_transition.dart';
+import 'package:image_search_app/ui/screens/gallery/preview_photo_screen.dart';
 
-
-class HomePage extends StatefulWidget{
+class HomePage extends StatefulWidget {
   late final CameraDescription camera;
   @override
   State<StatefulWidget> createState() {
@@ -15,8 +16,8 @@ class HomePage extends StatefulWidget{
   }
 }
 
-class _HomePageState extends State<HomePage>{
-
+class _HomePageState extends State<HomePage> {
+  var imageFile;
   @override
   void initState() {
     super.initState();
@@ -26,28 +27,60 @@ class _HomePageState extends State<HomePage>{
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ProjectColors.black,
-      appBar: const InnerAppBar(automaticalyImplyLeading: false, title: 'Search',),
+      appBar: const InnerAppBar(
+        automaticalyImplyLeading: false,
+        title: 'Search',
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const SizedBox(height: 40,),
+          const SizedBox(
+            height: 40,
+          ),
           RawCard(
             iconUp: const RawIcon(
               icon: Icons.photo_outlined,
               backColor: Colors.green,
             ),
             textUp: 'Photo',
-            onPressedUp: (){print('phot');},
+            onPressedUp: () async {
+              var picture =
+                  await ImagePicker().pickImage(source: ImageSource.gallery);
+
+              setState(() {
+                imageFile = picture;
+              });
+              if (imageFile != null) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => PreviewPhotoScreen(
+                              image: File(imageFile.path),
+                            )));
+              }
+            },
             iconDown: const RawIcon(
               icon: Icons.photo_camera_sharp,
               backColor: Colors.purple,
             ),
             textDown: 'Camera',
             onPressedDown: () async {
-              print('Camera');
-              },
+              var picture =
+                  await ImagePicker().pickImage(source: ImageSource.camera);
 
+              setState(() {
+                imageFile = picture;
+              });
+              if (imageFile != null) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => PreviewPhotoScreen(
+                              image: File(imageFile.path),
+                            )));
+              }
+            },
           ),
           RawCard(
             textDown: 'History',
@@ -60,8 +93,12 @@ class _HomePageState extends State<HomePage>{
               backColor: Colors.red,
             ),
             textUp: 'Image URL',
-            onPressedDown: (){Navigator.pushNamed(context, MainNavigationRoutes.historyWords);},
-            onPressedUp: (){Navigator.pushNamed(context, MainNavigationRoutes.searchUrl);},
+            onPressedDown: () {
+              Navigator.pushNamed(context, MainNavigationRoutes.historyWords);
+            },
+            onPressedUp: () {
+              Navigator.pushNamed(context, MainNavigationRoutes.searchUrl);
+            },
           ),
           RawCard(
             textDown: 'Settings',
@@ -74,8 +111,12 @@ class _HomePageState extends State<HomePage>{
               backColor: Color(0xFF59A8D6),
             ),
             textUp: 'Search by words',
-            onPressedDown: (){Navigator.pushNamed(context, MainNavigationRoutes.settings);},
-            onPressedUp: (){Navigator.pushNamed(context, MainNavigationRoutes.searchWords);},
+            onPressedDown: () {
+              Navigator.pushNamed(context, MainNavigationRoutes.settings);
+            },
+            onPressedUp: () {
+              Navigator.pushNamed(context, MainNavigationRoutes.searchWords);
+            },
           )
         ],
       ),
@@ -83,26 +124,23 @@ class _HomePageState extends State<HomePage>{
   }
 }
 
-class RawIcon extends StatelessWidget{
-  
+class RawIcon extends StatelessWidget {
   final IconData icon;
   final Color backColor;
 
-  const RawIcon({Key? key,required this.icon,required this.backColor}):super(key:key);
-  
+  const RawIcon({Key? key, required this.icon, required this.backColor})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(3),
       decoration: BoxDecoration(
-        color: backColor,
-          borderRadius: BorderRadius.circular(4)
-      ),
+          color: backColor, borderRadius: BorderRadius.circular(4)),
       child: Icon(
         icon,
         size: 29,
       ),
     );
   }
-  
 }

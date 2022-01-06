@@ -17,6 +17,7 @@ class InnerAppBar extends StatelessWidget implements PreferredSizeWidget{
       centerTitle: true,
       backgroundColor: ProjectColors.darkGray,
       automaticallyImplyLeading: automaticalyImplyLeading,
+      leading: automaticalyImplyLeading==false&&backBtn!=null ? backBtn : null,
       title: Text(
         title,
         style: AppTypography.semiBold18,
@@ -27,6 +28,6 @@ class InnerAppBar extends StatelessWidget implements PreferredSizeWidget{
 
   @override
   // TODO: implement preferredSize
-  Size get preferredSize => const Size.fromHeight(50);
+  Size get preferredSize => const Size.fromHeight(55);
 
 }

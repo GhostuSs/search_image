@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_search_app/ui/components/uikit/ios_back_button.dart';
 import 'package:image_search_app/ui/components/uikit/textfield.dart';
 import 'package:dio/dio.dart';
 import 'package:image_search_app/ui/screens/browser/browser_page.dart';
@@ -24,17 +25,9 @@ class _SearchWordsScreenState extends State<SearchWordsScreen>{
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ProjectColors.black,
-      appBar: CupertinoNavigationBar(
+      appBar: const CupertinoNavigationBar(
         backgroundColor: ProjectColors.darkGray,
-        leading: TextButton(
-          onPressed: ()=>Navigator.pop(context),
-          child: Row(
-              children:const [
-                Icon(Icons.arrow_back_ios,color: CupertinoColors.systemBlue,size: 23,),
-                Text('Back',style: TextStyle(color: CupertinoColors.systemBlue),)
-              ]
-          ),
-        ),
+        leading: IosBackBtn(),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
