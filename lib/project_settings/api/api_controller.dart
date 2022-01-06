@@ -42,7 +42,7 @@ class Api{
     String? responseData;
     try{
       await dio.get(
-          BaseUrl.google+ApiRoutes.searchByImageGoogle+url,
+        BaseUrl.google+ApiRoutes.searchByImageGoogle+url,
       ).then((response) => responseData=response.realUri.toString());
     } on DioError catch (error) {
       debugPrint("Error message: " + error.response!.data['message']);
@@ -54,7 +54,7 @@ class Api{
     String? responseData;
     try{
       await dio.get(
-          BaseUrl.yandex+ApiRoutes.searchByImageYandex+url,
+        BaseUrl.yandex+ApiRoutes.searchByImageYandex+url,
       ).then((response) => responseData=response.realUri.toString());
     } on DioError catch (error) {
       debugPrint("Error message: " + error.response!.data['message']);
@@ -82,6 +82,10 @@ class Api{
       "timestamp": DateTime.now().toString(),
       "api_key":'891219667978811',
       "upload_preset":'kuktu5xn'});
-    await dio.post(BaseUrl.server, data: formData).then((response) => context.read<UrlList>().addList(response.data['url'].toString()));
+    await dio.post(BaseUrl.server, data: formData).then(
+            (response){
+          context.read<UrlList>().addToUrlList(response.data['url'].toString());
+          context.read<UrlList>().addToDatesList(response.data['created_at'].toString());
+        });
   }
 }
