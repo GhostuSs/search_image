@@ -36,8 +36,9 @@ class _PreviewPhotoScreenState extends State<PreviewPhotoScreen>{
           TextButton(
               onPressed: () async {
                 await Api().uploadImage(widget.image,context);
-                await context.read<UrlList>().getList();
-                },
+                await context.read<UrlList>().getUrlList();
+                await context.read<UrlList>().getDatesList();
+              },
               child: const Text(
                 'Ok',
                 style: TextStyle(
