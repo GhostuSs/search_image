@@ -26,6 +26,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
   Widget returnableWidget=Container();
 
   void _selector() {
+
     switch (segmentedControlValue) {
       case 0:
         {

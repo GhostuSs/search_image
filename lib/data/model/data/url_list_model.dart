@@ -1,7 +1,7 @@
-import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UrlList {
+
   List<String> urlList = List.empty(growable: true);
   List<String> dateList = List.empty(growable: true);
 
