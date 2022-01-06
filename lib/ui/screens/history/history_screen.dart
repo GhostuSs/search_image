@@ -26,7 +26,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
   Widget returnableWidget=Container();
 
   void _selector() {
-
     switch (segmentedControlValue) {
       case 0:
         {
@@ -52,7 +51,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                             const SizedBox(width: 15),
                             Container(
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8.0)
+                                  borderRadius: BorderRadius.circular(8.0)
                               ),
                               width: 32,
                               height: 32,
