@@ -5,8 +5,8 @@ class IosBackBtn extends StatelessWidget{
   const IosBackBtn({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => Navigator.pop(context),
+    return TextButton(
+      onPressed: () => Navigator.pop(context),
       child: Row(
         mainAxisSize: MainAxisSize.min,
           children: const [

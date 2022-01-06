@@ -48,6 +48,7 @@ class _SearchUrlScreenState extends State<SearchUrlScreen>{
                 value=searchController.text;
               }, onSearchPressed: () async{
               String? urlGoogle = await Api().searchByUrlGoogle(searchController.text);
+              print(urlGoogle);
               String? urlYandex = await Api().searchByUrlYandex(searchController.text);
               Navigator.push(context, MaterialPageRoute(builder: (BuildContext ctx)=>BrowserPage(urlGoogle: urlGoogle,urlYandex: urlYandex,)));
             },

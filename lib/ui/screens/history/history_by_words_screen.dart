@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_search_app/project_settings/colors/color_palette.dart';
-import 'package:image_search_app/routes.dart';
 import 'package:image_search_app/ui/components/uikit/ios_back_button.dart';
-import 'package:image_search_app/ui/screens/settings/settings_screen.dart';
+import 'package:provider/src/provider.dart';
+import '../../../data/model/data/url_list_model.dart';
+import '../../../data/model/data/words_list_model.dart';
+import '../../../project_settings/api/api_controller.dart';
 import '../../components/uikit/raw_segmented.dart';
+import '../browser/browser_page.dart';
 
 class HistoryOfWordsScreen extends StatefulWidget {
   final String? urlGoogle;
@@ -19,24 +22,165 @@ class HistoryOfWordsScreen extends StatefulWidget {
 
 class _HistoryOfWordsScreenState extends State<HistoryOfWordsScreen> {
   int segmentedControlValue = 0;
-  final List<CardData> _items = [
-    CardData(text: 'Dog', onCardPressed: (){}),
-    CardData(text: 'Cat', onCardPressed: (){})
-  ];
-  void onCardPressed(){
-    Navigator.pushNamed(context, MainNavigationRoutes.home);
+  Widget returnableWidget=Container();
+
+  void _selector() {
+    switch (segmentedControlValue) {
+      case 0:
+        {
+          setState(() {
+            returnableWidget = Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Container(
+                decoration: BoxDecoration(
+                    color: ProjectColors.darkGray.withOpacity(0.8),
+                    borderRadius: BorderRadius.circular(8)
+                ),
+                child: Column(
+                  children: [
+                    for(int i = 0; i < context
+                        .read<UrlList>()
+                        .urlList
+                        .length; i++)InkWell(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: Row(
+                          children: [
+                            const SizedBox(width: 15),
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8.0)
+                              ),
+                              width: 32,
+                              height: 32,
+                              child: Image.network(context
+                                  .read<UrlList>()
+                                  .urlList[i]),
+                            ),
+                            Text(
+                                'soon',
+                                style: TextStyle(
+                                    color: ProjectColors.white.withOpacity(0.9),
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 18.0,
+                                    fontFamily: 'JosefinSans-SemiBold'
+                                )
+                            ),
+                            const Spacer(),
+                            const Padding(
+                                padding: EdgeInsets.only(right: 15),
+                                child: Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: ProjectColors.textLightGray,
+                                )
+                            )
+                          ],
+                        ),
+                      ),
+                      onTap: () async {
+                        //TODO: implement function which will navigate you to url page
+                        final word = context
+                            .read<WordList>()
+                            .wordList[i];
+                        String? urlGoogle = await Api().searchByWordsGoogle(
+                            word);
+                        String? urlYandex = await Api().searchByWordsYandex(
+                            word);
+                        Navigator.push(context, MaterialPageRoute(builder: (
+                            BuildContext ctx) =>
+                            BrowserPage(
+                              urlGoogle: urlGoogle, urlYandex: urlYandex,)));
+                      },
+                    )
+                  ],
+                ),
+              ),
+            );
+          });
+        }
+        break;
+      case 1 :
+        {
+          setState(() {
+            returnableWidget = Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Container(
+                decoration: BoxDecoration(
+                    color: ProjectColors.darkGray.withOpacity(0.8),
+                    borderRadius: BorderRadius.circular(8)
+                ),
+                child: Column(
+                  children: [
+                    for(int i = 0; i < context
+                        .read<WordList>()
+                        .wordList
+                        .length; i++)InkWell(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: Row(
+                          children: [
+                            const SizedBox(width: 15),
+                            Text(
+                                context
+                                    .read<WordList>()
+                                    .wordList[i],
+                                style: TextStyle(
+                                    color: ProjectColors.white.withOpacity(0.9),
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 18.0,
+                                    fontFamily: 'JosefinSans-SemiBold'
+                                )
+                            ),
+                            const Spacer(),
+                            const Padding(
+                                padding: EdgeInsets.only(right: 15),
+                                child: Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: ProjectColors.textLightGray,
+                                )
+                            )
+                          ],
+                        ),
+                      ),
+                      onTap: () async {
+                        final word = context
+                            .read<WordList>()
+                            .wordList[i];
+                        String? urlGoogle = await Api().searchByWordsGoogle(
+                            word);
+                        String? urlYandex = await Api().searchByWordsYandex(
+                            word);
+                        Navigator.push(context, MaterialPageRoute(builder: (
+                            BuildContext ctx) =>
+                            BrowserPage(
+                              urlGoogle: urlGoogle, urlYandex: urlYandex,)));
+                      },
+                    )
+                  ],
+                ),
+              ),
+            );
+          });
+        }
+    }
+  }
+
+
+  Future<void> _getData() async {
+    context.read<WordList>().wordList=await context.read<WordList>().getList();
+    context.read<UrlList>().urlList=await context.read<UrlList>().getList();
   }
   @override
   initState() {
+    _selector();
+    _getData();
     super.initState();
-  }
-  Future<String> getValue() async {
-    String url;
-    segmentedControlValue==0 ? url=widget.urlGoogle! : url=widget.urlYandex!;
-    return url;
   }
   @override
   Widget build(BuildContext context) {
+    _selector();
     return DefaultTabController(
         length: 2,
         child: Scaffold(
@@ -66,52 +210,7 @@ class _HistoryOfWordsScreenState extends State<HistoryOfWordsScreen> {
                   ],
                 ),
                 const SizedBox(height: 10),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: ProjectColors.darkGray.withOpacity(0.8),
-                        borderRadius: BorderRadius.circular(8)
-                    ),
-                    child: Column(
-                      children: [
-                        for(int i=0;i<_items.length;i++)InkWell(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: Row(
-                              children: [
-                                _items[i].iconPath!= null ? Padding(
-                                    padding: const EdgeInsets.only(left: 20,right: 15,top: 10,bottom: 10),
-                                    child: Image.asset(_items[i].iconPath!)
-                                )
-                                    :Container(width: 15,),
-                                Text(
-                                    _items[i].text,
-                                    style: TextStyle(
-                                        color: ProjectColors.white.withOpacity(0.9),
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 18.0,
-                                        fontFamily: 'JosefinSans-SemiBold'
-                                    )
-                                ),
-                                const Spacer(),
-                                const Padding(
-                                    padding: EdgeInsets.only(right: 15),
-                                    child: Icon(
-                                      Icons.arrow_forward_ios,
-                                      color: ProjectColors.textLightGray,
-                                    )
-                                )
-                              ],
-                            ),
-                          ),
-                          onTap: _items[i].onCardPressed,
-                        )
-                      ],
-                    ),
-                  ),
-                )
+                returnableWidget
               ],
             ),
           ),

@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_search_app/data/model/data/url_list_model.dart';
 import 'package:image_search_app/project_settings/colors/color_palette.dart';
 import 'package:image_search_app/ui/components/uikit/appbar.dart';
 import 'dart:io';
 import 'package:image_search_app/ui/components/uikit/ios_back_button.dart';
+import 'package:provider/src/provider.dart';
 import '../../../project_settings/api/api_controller.dart';
 
 class PreviewPhotoScreen extends StatefulWidget{
@@ -33,7 +35,8 @@ class _PreviewPhotoScreenState extends State<PreviewPhotoScreen>{
         actions: [
           TextButton(
               onPressed: () async {
-                await Api().uploadImage(widget.image);
+                await Api().uploadImage(widget.image,context);
+                await context.read<UrlList>().getList();
                 },
               child: const Text(
                 'Ok',

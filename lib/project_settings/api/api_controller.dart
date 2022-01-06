@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:image_search_app/project_settings/api/routes/api_routes.dart';
+import 'package:provider/src/provider.dart';
+import '../../data/model/data/url_list_model.dart';
 import 'base_url.dart';
 import 'dart:io';
 
@@ -72,7 +74,7 @@ class Api{
     }
     return responseData;
   }
-  Future<void> uploadImage(File file) async {
+  Future<void> uploadImage(File file,BuildContext context) async {
     String fileName = file.path.split('/').last;
     FormData formData = FormData.fromMap({
       "file":
@@ -80,9 +82,6 @@ class Api{
       "timestamp": DateTime.now().toString(),
       "api_key":'891219667978811',
       "upload_preset":'kuktu5xn'});
-    await dio.post(BaseUrl.server, data: formData).then((response) => print(response.data));
-  }
-  Future<void> downloadImage() async {
-    await dio.get(BaseUrl.server).then((response) => print(response.data));
+    await dio.post(BaseUrl.server, data: formData).then((response) => context.read<UrlList>().addList(response.data['url'].toString()));
   }
 }
