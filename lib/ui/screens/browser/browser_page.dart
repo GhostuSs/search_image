@@ -7,7 +7,8 @@ import '../../components/uikit/raw_segmented.dart';
 class BrowserPage extends StatefulWidget {
   final String? urlGoogle;
   final String? urlYandex;
-  const BrowserPage({Key? key, this.urlGoogle, this.urlYandex}) : super(key: key);
+  final bool? urlSearchEnable;
+  const BrowserPage({Key? key, this.urlGoogle, this.urlYandex, this.urlSearchEnable}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -35,6 +36,7 @@ class _BrowserPageState extends State<BrowserPage> {
     return DefaultTabController(
         length: 2,
         child: Scaffold(
+          resizeToAvoidBottomInset: true,
           backgroundColor: ProjectColors.black,
           appBar: CupertinoNavigationBar(
             backgroundColor: ProjectColors.darkGray,
@@ -63,6 +65,7 @@ class _BrowserPageState extends State<BrowserPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     RawSegmented(
+                      tabsNames: ['Google','Yandex'],
                       onValueChanged: (int? value) {
                         setState(() {
                           segmentedControlValue = value!;

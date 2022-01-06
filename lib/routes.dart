@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_search_app/ui/screens/browser/browser_page.dart';
+import 'package:image_search_app/ui/screens/history/history_by_words_screen.dart';
 import 'package:image_search_app/ui/screens/home.dart';
 import 'package:image_search_app/ui/screens/onboarding/onboarding.dart';
 import 'package:image_search_app/ui/screens/search_by_words/search_by_words_screen.dart';
@@ -14,6 +15,7 @@ abstract class MainNavigationRoutes{
   static const String searchUrl = '/searchurl';
   static const String searchWords = '/searchwords';
   static const String browser = '/browser';
+  static const String historyWords='/historywords';
 }
 final routes = {
   MainNavigationRoutes.home: (BuildContext context) => HomePage(),
@@ -21,6 +23,7 @@ final routes = {
   MainNavigationRoutes.settings: (BuildContext context) => const SettingsScreen(),
   MainNavigationRoutes.searchUrl: (BuildContext context) => const SearchUrlScreen(),
   MainNavigationRoutes.searchWords: (BuildContext context) => const SearchWordsScreen(),
-  MainNavigationRoutes.browser: (BuildContext context) => BrowserPage(),
+  MainNavigationRoutes.browser: (BuildContext context) => const BrowserPage(),
+  MainNavigationRoutes.historyWords: (BuildContext context) => const HistoryOfWordsScreen(),
 };
 

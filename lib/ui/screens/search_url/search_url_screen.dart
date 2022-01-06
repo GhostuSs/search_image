@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_search_app/ui/components/uikit/textfield.dart';
 
+import '../../../project_settings/api/api_controller.dart';
 import '../../../project_settings/colors/color_palette.dart';
 import '../browser/browser_page.dart';
 
@@ -53,8 +54,9 @@ class _SearchUrlScreenState extends State<SearchUrlScreen>{
               onChanged: (value){
                 value=searchController.text;
               }, onSearchPressed: () async{
-              String url = searchController.text;
-              Navigator.push(context, MaterialPageRoute(builder: (BuildContext ctx)=>BrowserPage(urlGoogle: url,urlYandex: url,)));
+              String? urlGoogle = await Api().searchByImageGoogle(searchController.text);
+              String? urlYandex = await Api().searchByImageYandex(searchController.text);
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext ctx)=>BrowserPage(urlGoogle: urlGoogle,urlYandex: urlYandex,)));
             },
           )
         ],

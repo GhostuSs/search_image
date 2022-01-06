@@ -36,4 +36,28 @@ class Api{
     }
     return responseData;
   }
+  Future<String?> searchByImageGoogle(String url) async {
+    String? responseData;
+    try{
+      await dio.get(
+          BaseUrl.google+ApiRoutes.searchByImageGoogle+url,
+      ).then((response) => responseData=response.realUri.toString());
+    } on DioError catch (error) {
+      debugPrint("Error message: " + error.response!.data['message']);
+      debugPrint("Error code: " + error.message);
+    }
+    return responseData;
+  }
+  Future<String?> searchByImageYandex(String url) async {
+    String? responseData;
+    try{
+      await dio.get(
+          BaseUrl.yandex+ApiRoutes.searchByImageYandex+url,
+      ).then((response) => responseData=response.realUri.toString());
+    } on DioError catch (error) {
+      debugPrint("Error message: " + error.response!.data['message']);
+      debugPrint("Error code: " + error.message);
+    }
+    return responseData;
+  }
 }

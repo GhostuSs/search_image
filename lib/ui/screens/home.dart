@@ -4,6 +4,7 @@ import 'package:image_search_app/project_settings/colors/color_palette.dart';
 import 'package:image_search_app/routes.dart';
 import 'package:image_search_app/ui/components/uikit/appbar.dart';
 import 'package:image_search_app/ui/components/uikit/settings_card.dart';
+import 'package:page_transition/page_transition.dart';
 
 
 class HomePage extends StatefulWidget{
@@ -16,7 +17,6 @@ class HomePage extends StatefulWidget{
 
 class _HomePageState extends State<HomePage>{
 
-
   @override
   void initState() {
     super.initState();
@@ -24,7 +24,6 @@ class _HomePageState extends State<HomePage>{
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: ProjectColors.black,
       appBar: const InnerAppBar(automaticalyImplyLeading: false, title: 'Search',),
@@ -46,8 +45,7 @@ class _HomePageState extends State<HomePage>{
             ),
             textDown: 'Camera',
             onPressedDown: () async {
-
-              //Navigator.push(context,PageTransition(child: CameraScreen(camera:firstCamera), type: PageTransitionType.leftToRight));
+              print('Camera');
               },
 
           ),
@@ -62,7 +60,7 @@ class _HomePageState extends State<HomePage>{
               backColor: Colors.red,
             ),
             textUp: 'Image URL',
-            onPressedDown: (){debugPrint('History');},
+            onPressedDown: (){Navigator.pushNamed(context, MainNavigationRoutes.historyWords);},
             onPressedUp: (){Navigator.pushNamed(context, MainNavigationRoutes.searchUrl);},
           ),
           RawCard(

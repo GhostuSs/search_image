@@ -46,10 +46,11 @@ class _SettingsScreenState extends State<SettingsScreen>{
                     padding: EdgeInsets.symmetric(vertical: 5),
                     child: Row(
                       children: [
-                        Padding(
+                        _items[i].iconPath!= null ? Padding(
                             padding: const EdgeInsets.only(left: 20,right: 15,top: 10,bottom: 10),
-                            child: Image.asset(_items[i].iconPath)
-                        ),
+                            child: Image.asset(_items[i].iconPath!)
+                        )
+                            :Container(),
                         Text(
                             _items[i].text,
                             style: TextStyle(
@@ -83,9 +84,9 @@ class _SettingsScreenState extends State<SettingsScreen>{
 }
 
 class CardData{
-  CardData({required this.text, required this.iconPath, required this.onCardPressed});
+  CardData({required this.text,this.iconPath, required this.onCardPressed});
   
   final String text;
-  final String iconPath;
+  final String? iconPath;
   final void Function() onCardPressed;
 }
