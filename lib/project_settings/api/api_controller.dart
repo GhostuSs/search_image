@@ -82,10 +82,6 @@ class Api{
       "timestamp": DateTime.now().toString(),
       "api_key":'891219667978811',
       "upload_preset":'kuktu5xn'});
-    await dio.post(BaseUrl.server, data: formData).then(
-            (response){
-              context.read<UrlList>().addToUrlList(response.data['url'].toString());
-              context.read<UrlList>().addToDatesList(response.data['created_at'].toString());
-    });
+    await dio.post(BaseUrl.server, data: formData).then((response) => context.read<UrlList>().addList(response.data['url'].toString()));
   }
 }
