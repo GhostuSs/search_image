@@ -11,7 +11,13 @@ class RateMyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const _textStyle = AppTypography.semiBold18Blue;
+    final double height = MediaQuery.of(context).size.height;
+    final TextStyle _textStyle = TextStyle(
+        fontFamily: 'Montserrat',
+        fontWeight: FontWeight.w700,
+        fontSize: height*0.022,
+        color: ProjectColors.systemBlue
+    );
     return Theme(
         data: ThemeData.dark(),
         child: CupertinoAlertDialog(
@@ -79,7 +85,7 @@ class RateMyApp extends StatelessWidget {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: const Text(
+                    child: Text(
                       '        Cancel',
                       style: _textStyle,
                     )),
@@ -92,7 +98,7 @@ class RateMyApp extends StatelessWidget {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: const Text(
+                    child: Text(
                       'Submit       ',
                       style: _textStyle,
                     ))
