@@ -14,6 +14,8 @@ class InnerAppBar extends StatelessWidget implements PreferredSizeWidget{
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      titleSpacing: 0,
+      leadingWidth: 90,
       centerTitle: true,
       backgroundColor: ProjectColors.darkGray,
       automaticallyImplyLeading: automaticalyImplyLeading,

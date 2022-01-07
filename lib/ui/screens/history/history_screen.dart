@@ -45,7 +45,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         .length; i++)InkWell(
                       borderRadius: BorderRadius.circular(8.0),
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        padding: const EdgeInsets.symmetric(vertical: 15),
                         child: Row(
                           children: [
                             const SizedBox(width: 15),
@@ -59,8 +59,9 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                   .read<UrlList>()
                                   .urlList[i]),
                             ),
+                            const SizedBox(width: 10),
                             Text(
-                                context.read<UrlList>().dateList[i],
+                                context.read<UrlList>().dateList[i].substring(0,10).replaceAll('-','.'),
                                 style: TextStyle(
                                     color: ProjectColors.white.withOpacity(0.9),
                                     fontWeight: FontWeight.w500,

@@ -7,13 +7,19 @@ class IosBackBtn extends StatelessWidget{
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () => Navigator.pop(context),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-          children: const [
-            SizedBox(width: 10,),
+      child: Row(children: const [
+        SizedBox(width: 5,),
+        Icon(
+          Icons.arrow_back_ios,
+          color: CupertinoColors.systemBlue,
+          size: 21,
+        ),
         Text(
           'Back',
-          style: TextStyle(color: CupertinoColors.systemBlue,fontSize: 18),
+          style: TextStyle(
+              color: CupertinoColors.systemBlue,
+            fontSize: 18
+          ),
         )
       ]),
     );

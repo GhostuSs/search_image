@@ -5,6 +5,7 @@ import 'package:image_search_app/project_settings/colors/color_palette.dart';
 import 'package:image_search_app/ui/components/uikit/appbar.dart';
 import 'dart:io';
 import 'package:image_search_app/ui/components/uikit/ios_back_button.dart';
+import 'package:image_search_app/ui/screens/browser/browser_page.dart';
 import 'package:provider/src/provider.dart';
 import '../../../project_settings/api/api_controller.dart';
 
@@ -38,6 +39,9 @@ class _PreviewPhotoScreenState extends State<PreviewPhotoScreen>{
                 await Api().uploadImage(widget.image,context);
                 await context.read<UrlList>().getUrlList();
                 await context.read<UrlList>().getDatesList();
+                final String? urlGoogle = await Api().searchByUrlGoogle(context.read<UrlList>().urlList.last);
+                final String? urlYandex = await Api().searchByUrlYandex(context.read<UrlList>().urlList.last);
+                Navigator.push(context,MaterialPageRoute(builder: (BuildContext context)=>BrowserPage(urlGoogle: urlGoogle,urlYandex: urlYandex,)));
               },
               child: const Text(
                 'Ok',

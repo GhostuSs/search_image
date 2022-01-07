@@ -5,7 +5,7 @@
 <key>NSCameraUsageDescription</key>
 <string>Give access to find with camera</string>
 <key>NSPhotoLibraryUsageDescription</key>
-<string>App needs access to photo lib for profile images</string>
+<string>App needs access to photo library</string>
     <key>io.flutter.embedded_views_preview</key><string>yes</string>
     <key>NSAppTransportSecurity</key>
     <dict>
