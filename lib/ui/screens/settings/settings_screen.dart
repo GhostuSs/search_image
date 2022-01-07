@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_search_app/ui/components/uikit/appbar.dart';
+import 'package:image_search_app/ui/components/uikit/ios_back_button.dart';
 
 import '../../../project_settings/colors/color_palette.dart';
 import '../../../project_settings/images/icons.dart';
@@ -24,10 +25,12 @@ class _SettingsScreenState extends State<SettingsScreen>{
   ];
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: ProjectColors.black,
       appBar: const InnerAppBar(
-        automaticalyImplyLeading: true,
+        automaticalyImplyLeading: false,
+        backBtn: IosBackBtn(),
         title: 'Settings',
       ),
       body: Column(
@@ -43,11 +46,11 @@ class _SettingsScreenState extends State<SettingsScreen>{
                 for(int i=0;i<_items.length;i++)InkWell(
                   borderRadius: BorderRadius.circular(8.0),
                   child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 5),
+                    padding: EdgeInsets.symmetric(vertical: height*0.005),
                     child: Row(
                       children: [
                         _items[i].iconPath!= null ? Padding(
-                            padding: const EdgeInsets.only(left: 20,right: 15,top: 10,bottom: 10),
+                            padding: EdgeInsets.only(left: 20,right: 15,top: height*0.01,bottom: height*0.01),
                             child: Image.asset(_items[i].iconPath!)
                         )
                             :Container(),
@@ -56,7 +59,7 @@ class _SettingsScreenState extends State<SettingsScreen>{
                             style: TextStyle(
                                 color: ProjectColors.white.withOpacity(0.9),
                                 fontWeight: FontWeight.w500,
-                                fontSize: 24.0,
+                                fontSize: height*0.026,
                                 fontFamily: 'JosefinSans-SemiBold'
                             )
                         ),

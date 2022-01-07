@@ -25,6 +25,7 @@ class _SearchWordsScreenState extends State<SearchWordsScreen>{
   final Dio dio=Dio();
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: ProjectColors.black,
       appBar: const CupertinoNavigationBar(
@@ -34,14 +35,14 @@ class _SearchWordsScreenState extends State<SearchWordsScreen>{
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 40),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+          SizedBox(height: height*0.043),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10,vertical: height*0.01),
             child: Text('Image search by words',
               style: TextStyle(
                   fontWeight: FontWeight.w300,
                   color: Colors.white,
-                  fontSize: 18,
+                  fontSize: height*0.02,
                   fontFamily: 'Montserrat'
               ),),
           ),

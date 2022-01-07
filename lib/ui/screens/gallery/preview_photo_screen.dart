@@ -8,6 +8,8 @@ import 'package:image_search_app/ui/components/uikit/ios_back_button.dart';
 import 'package:image_search_app/ui/screens/browser/browser_page.dart';
 import 'package:provider/src/provider.dart';
 import '../../../project_settings/api/api_controller.dart';
+import '../../../project_settings/api/base_url.dart';
+import '../../../project_settings/api/routes/api_routes.dart';
 
 class PreviewPhotoScreen extends StatefulWidget{
   const PreviewPhotoScreen({Key? key, required this.image}) : super(key: key);
@@ -28,6 +30,7 @@ class _PreviewPhotoScreenState extends State<PreviewPhotoScreen>{
 
   @override
   Widget build(BuildContext context) {
+    final height=MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: ProjectColors.black,
       appBar: InnerAppBar(
@@ -41,30 +44,35 @@ class _PreviewPhotoScreenState extends State<PreviewPhotoScreen>{
                   flag=false;
                 });
                 await Api().uploadImage(widget.image,context);
-                final String? urlGoogle = await Api().searchByUrlGoogle(context.read<UrlList>().urlList.last);
+                final String? urlGoogle = BaseUrl.google+ApiRoutes.searchByImageGoogle+context.read<UrlList>().urlList.last;
+                print('Ok pressed: $urlGoogle');
                 final String? urlYandex = await Api().searchByUrlYandex(context.read<UrlList>().urlList.last);
                 setState(() {
                   flag=true;
                 });
                 Navigator.push(context,MaterialPageRoute(builder: (BuildContext context)=>BrowserPage(urlGoogle: urlGoogle,urlYandex: urlYandex,)));
               },
-              child: const Text(
+              child: Text(
                 'Ok',
                 style: TextStyle(
                     color: CupertinoColors.systemBlue,
-                    fontSize: 18
+                    fontSize: height*0.02
                 ),
               )
           ) : const Padding(padding: EdgeInsets.only(right: 20),child: CupertinoActivityIndicator(),)
         ],
 
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.file(widget.image)
-        ],
+      body: SingleChildScrollView(
+        physics: const NeverScrollableScrollPhysics(),
+        child: Column(
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height*0.03,
+            ),
+            Image.file(widget.image)
+          ],
+        ),
       ),
     );
   }

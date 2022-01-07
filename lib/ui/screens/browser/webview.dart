@@ -21,7 +21,6 @@ class _WebViewPageState extends State<WebViewPage>{
     return SizedBox(
       height: height*0.85,
       child: WebView(
- //tutorial https://www.youtube.com/watch?v=rNCQ54kFgFY
         javascriptMode: JavascriptMode.unrestricted,
         initialUrl: widget.url,
       ),

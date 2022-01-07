@@ -66,12 +66,12 @@ class _OnBoardingScreen extends State<OnBoardingScreen> {
   }
   Widget floatingBtm(String text,onPressed,width,height){
     return Container(
-      padding: EdgeInsets.symmetric(vertical: height*0.07),
+      padding: EdgeInsets.symmetric(vertical: height*0.055),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Padding(
-            padding:EdgeInsets.only(left: 60.0,right: 60.0,top:10.0,bottom: height*0.013),
+            padding:EdgeInsets.only(left: 60.0,right: 60.0,top:height*0.01,bottom: height*0.01),
             child: BaseButton(
               onPressed: onPressed,
             label: 'Continue',
@@ -84,34 +84,34 @@ class _OnBoardingScreen extends State<OnBoardingScreen> {
                   child: const Text(
                     'Privacy Policy',
                     style: TextStyle(
-                        color: Color(0xFF554469),
-                        fontFamily: 'JosefinSans-Light',
+                        color: ProjectColors.textLightGray,
+                        fontFamily: 'Montserrat',
                         fontSize: 12.0
                     ),
                   ),
                   onTap: ()=>{},
                 ),
-                const SizedBox(width: 40),
+                SizedBox(width: height*0.043),
                 InkWell(
                   child: const Text(
                     'Restore',
                     style: TextStyle(
-                        color: Color(0xFF554469),
-                        fontFamily: 'JosefinSans-Light',
+                        color: ProjectColors.textLightGray,
+                        fontFamily: 'Montserrat',
                         fontSize: 12.0
                     ),
                   ),
                   onTap: ()=>{},
                 ),
-                const SizedBox(width: 40),
+                SizedBox(width: height*0.043),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  padding: EdgeInsets.symmetric(horizontal: height*0.01),
                   child: InkWell(
                     child: const Text(
                       'Terms of Use',
                       style: TextStyle(
-                          color: Color(0xFF554469),
-                          fontFamily: 'JosefinSans-Light',
+                          color: ProjectColors.textLightGray,
+                          fontFamily: 'Montserrat',
                           fontSize: 12.0
                       ),
                     ),
@@ -119,7 +119,7 @@ class _OnBoardingScreen extends State<OnBoardingScreen> {
                   ),
                 )
               ]
-          ) : Text(''),
+          ) : const Text(''),
         ],
       ),
     );

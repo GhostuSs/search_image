@@ -14,8 +14,9 @@ class RawCard extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+    final double height = MediaQuery.of(context).size.height;
     return Padding(
-        padding: const EdgeInsets.only(bottom: 30,left: 10,right: 10),
+        padding: EdgeInsets.only(bottom: height*0.032,left: 10,right: 10),
         child: Container(
           width: double.infinity,
           decoration: BoxDecoration(
@@ -25,7 +26,7 @@ class RawCard extends StatelessWidget{
           child: Column(
             children: [
               InkWell(
-                borderRadius: BorderRadius.only(topLeft: const Radius.circular(8.0),topRight: const Radius.circular(8.0)),
+                borderRadius: const BorderRadius.only(topLeft: Radius.circular(8.0),topRight: Radius.circular(8.0)),
                 child: Card(
                   elevation: 0.0,
                   borderOnForeground: false,
@@ -33,7 +34,7 @@ class RawCard extends StatelessWidget{
                   child: Row(
                     children: [
                       Padding(
-                          padding: const EdgeInsets.only(left: 20,right: 15,top: 10,bottom: 10),
+                          padding: EdgeInsets.only(left: 20,right: 15,top: height*0.01,bottom: height*0.01),
                           child: iconUp
                       ),
                       Text(
@@ -41,7 +42,7 @@ class RawCard extends StatelessWidget{
                           style: TextStyle(
                               color: ProjectColors.white.withOpacity(0.9),
                               fontWeight: FontWeight.w500,
-                              fontSize: 24.0,
+                              fontSize: height*0.026,
                               fontFamily: 'JosefinSans-SemiBold'
                           )
                       ),
@@ -68,7 +69,7 @@ class RawCard extends StatelessWidget{
                   child: Row(
                     children: [
                       Padding(
-                          padding: const EdgeInsets.only(left: 20,right: 15,top: 10,bottom: 10),
+                          padding: EdgeInsets.only(left: 20,right: 15,top: height*0.01,bottom: height*0.01),
                           child: iconDown,
                           ),
                       Text(
@@ -76,7 +77,7 @@ class RawCard extends StatelessWidget{
                           style: TextStyle(
                               color: ProjectColors.white.withOpacity(0.9),
                               fontWeight: FontWeight.w500,
-                              fontSize: 24.0,
+                              fontSize: height*0.026,
                               fontFamily: 'JosefinSans-SemiBold'
                           )
                       ),

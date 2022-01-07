@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_search_app/project_settings/colors/color_palette.dart';
 import 'package:image_search_app/project_settings/typography/app_typography.dart';
 
 
@@ -32,7 +33,7 @@ class SliderTile extends StatelessWidget {
                     height: 40,
                     child: Icon(
                       CupertinoIcons.clear,
-                      color: Color(0xFF554469),
+                      color: ProjectColors.textLightGray,
                       size: 30.0,
                     ),
                   ),
@@ -56,16 +57,24 @@ class SliderTile extends StatelessWidget {
                     title,
                     textAlign: TextAlign.center,
                     maxLines: 2,
-                    style: AppTypography.semiBold24,
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.w700,
+                      fontSize: height*0.028
+                    ),
                   ),
                 ),
-                const SizedBox(height: 10),
+                SizedBox(height: height*0.01),
                 Padding(
                     padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.height*0.014),
                     child: Text(desc,
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.fade,
-                        style: AppTypography.normal18gray
+                        style: TextStyle(
+                          color: ProjectColors.textLightGray,
+                          fontSize: height*0.022,
+                          fontFamily: 'Montserrat'
+                        )
                     )
                 ),
               ],

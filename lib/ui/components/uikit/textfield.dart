@@ -34,6 +34,7 @@ class _RawTextFieldState extends State<RawTextField>{
   }
   @override
   Widget build(BuildContext context) {
+    final double height = MediaQuery.of(context).size.height;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Container(
@@ -57,8 +58,8 @@ class _RawTextFieldState extends State<RawTextField>{
                   child: InkWell(
                     onTap: widget.onSearchPressed,
                     child: Container(
-                      width: 32,
-                      height: 32,
+                      width: height*0.035,
+                      height: height*0.035,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
                           color: iconColor
@@ -67,7 +68,7 @@ class _RawTextFieldState extends State<RawTextField>{
                   ),
                 )
               ),
-              cursorHeight: 25,
+              cursorHeight: height*0.027,
               cursorWidth: 0.5,
               cursorColor: ProjectColors.white,
               controller: widget.textFieldController,

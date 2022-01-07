@@ -40,8 +40,9 @@ class Tab extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final height=MediaQuery.of(context).size.height;
     return SizedBox(
-        height: 32,
+        height: height*0.035,
         child: Center(
           child: Text(
             label,
@@ -49,7 +50,7 @@ class Tab extends StatelessWidget {
                 color: index!=isSelectedIndex ? ProjectColors.textLightGray : ProjectColors.white,
                 fontFamily: 'Montserrat',
                 fontWeight: FontWeight.w700,
-                fontSize: 18),
+                fontSize: height*0.02),
           ),
         ));
   }

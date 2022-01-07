@@ -5,20 +5,21 @@ class IosBackBtn extends StatelessWidget{
   const IosBackBtn({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return TextButton(
       onPressed: () => Navigator.pop(context),
-      child: Row(children: const [
-        SizedBox(width: 5,),
+      child: Row(children: [
+        SizedBox(width: height*0.0054),
         Icon(
           Icons.arrow_back_ios,
           color: CupertinoColors.systemBlue,
-          size: 21,
+          size: height*0.025,
         ),
         Text(
           'Back',
           style: TextStyle(
               color: CupertinoColors.systemBlue,
-            fontSize: 18
+            fontSize: height*0.025
           ),
         )
       ]),

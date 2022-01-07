@@ -40,6 +40,7 @@ class Api{
   }
   Future<String?> searchByUrlGoogle(String url) async {
     String? responseData;
+    print('curr url${BaseUrl.google+ApiRoutes.searchByImageGoogle+url}');
     try{
       await dio.get(
         BaseUrl.google+ApiRoutes.searchByImageGoogle+url,

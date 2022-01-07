@@ -11,9 +11,10 @@ class BaseButton extends StatelessWidget{
   
   @override
   Widget build(BuildContext context) {
+    final double height=MediaQuery.of(context).size.height;
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(vertical: 7.5),
+      padding: EdgeInsets.symmetric(vertical: height*0.0008),
       decoration: BoxDecoration(
         color: ProjectColors.blue,
         borderRadius: BorderRadius.circular(16)
@@ -21,7 +22,12 @@ class BaseButton extends StatelessWidget{
       child: TextButton(
         child: Text(
           label,
-          style: AppTypography.semiBold18,
+          style: TextStyle(
+              fontFamily: 'Montserrat',
+              fontWeight: FontWeight.w700,
+              fontSize: height*0.021,
+              color: ProjectColors.white
+          ),
         ),
         onPressed: onPressed,
       ),

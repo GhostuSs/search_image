@@ -13,6 +13,7 @@ class InnerAppBar extends StatelessWidget implements PreferredSizeWidget{
 
   @override
   Widget build(BuildContext context) {
+    final height=MediaQuery.of(context).size.height;
     return AppBar(
       titleSpacing: 0,
       leadingWidth: 90,
@@ -29,7 +30,7 @@ class InnerAppBar extends StatelessWidget implements PreferredSizeWidget{
   }
 
   @override
-  // TODO: implement preferredSize
+
   Size get preferredSize => const Size.fromHeight(55);
 
 }

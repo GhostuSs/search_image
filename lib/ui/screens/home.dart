@@ -25,6 +25,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final double height = MediaQuery.of(context).size.height;
+    print(MediaQuery.of(context).size.height);
     return Scaffold(
       backgroundColor: ProjectColors.black,
       appBar: const InnerAppBar(
@@ -35,8 +37,8 @@ class _HomePageState extends State<HomePage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const SizedBox(
-            height: 40,
+          SizedBox(
+            height: height*0.043,
           ),
           RawCard(
             iconUp: const RawIcon(
@@ -133,13 +135,14 @@ class RawIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double height = MediaQuery.of(context).size.height;
     return Container(
-      padding: const EdgeInsets.all(3),
+      padding: EdgeInsets.all(height*0.0032),
       decoration: BoxDecoration(
           color: backColor, borderRadius: BorderRadius.circular(4)),
       child: Icon(
         icon,
-        size: 29,
+        size: height*0.04,
       ),
     );
   }

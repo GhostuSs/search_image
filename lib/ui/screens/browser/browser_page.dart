@@ -8,8 +8,7 @@ import '../../components/uikit/raw_segmented.dart';
 class BrowserPage extends StatefulWidget {
   final String? urlGoogle;
   final String? urlYandex;
-  final bool? urlSearchEnable;
-  const BrowserPage({Key? key, this.urlGoogle, this.urlYandex, this.urlSearchEnable}) : super(key: key);
+  const BrowserPage({Key? key, this.urlGoogle, this.urlYandex}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -33,6 +32,7 @@ class _BrowserPageState extends State<BrowserPage> {
   }
   @override
   Widget build(BuildContext context) {
+    final double height=MediaQuery.of(context).size.height;
     _value = getValue();
     return DefaultTabController(
         length: 2,
@@ -48,12 +48,12 @@ class _BrowserPageState extends State<BrowserPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(height: 25),
+                SizedBox(height: height*0.027),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     RawSegmented(
-                      tabsNames: ['Google','Yandex'],
+                      tabsNames: const ['Google','Yandex'],
                       onValueChanged: (int? value) {
                         setState(() {
                           segmentedControlValue = value!;
@@ -63,7 +63,7 @@ class _BrowserPageState extends State<BrowserPage> {
                     )
                   ],
                 ),
-                const SizedBox(height: 10),
+                SizedBox(height: height*0.01),
                 FutureBuilder(
                   future: _value,
                   builder: (BuildContext context, AsyncSnapshot<String> snapshot,) {
@@ -78,7 +78,6 @@ class _BrowserPageState extends State<BrowserPage> {
                           ],),
                       );
                     } else{
-                      print(snapshot.data);
                       return WebViewPage(url: snapshot.data!);
                     }
                   },

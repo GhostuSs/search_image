@@ -8,12 +8,14 @@ import 'data/model/data/words_list_model.dart';
 
 
 bool seen=false;
+bool subscribe=false;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   seen = prefs.getBool("seen") ?? false;
   await prefs.setBool("seen", true);
+  seen=false;
   runApp(const App());
 }
 
