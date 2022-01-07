@@ -81,14 +81,14 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         ),
                       ),
                       onTap: () async {
-                        //TODO: implement function which will navigate you to url page
-                        final word = context
-                            .read<WordList>()
-                            .wordList[i];
-                        String? urlGoogle = await Api().searchByWordsGoogle(
-                            word);
-                        String? urlYandex = await Api().searchByWordsYandex(
-                            word);
+                        String? urlGoogle = await Api().searchByUrlGoogle(
+                            context
+                                .read<UrlList>()
+                                .urlList[i]);
+                        String? urlYandex = await Api().searchByUrlYandex(
+                            context
+                                .read<UrlList>()
+                                .urlList[i]);
                         Navigator.push(context, MaterialPageRoute(builder: (
                             BuildContext ctx) =>
                             BrowserPage(

@@ -37,8 +37,6 @@ class _PreviewPhotoScreenState extends State<PreviewPhotoScreen>{
           TextButton(
               onPressed: () async {
                 await Api().uploadImage(widget.image,context);
-                await context.read<UrlList>().getUrlList();
-                await context.read<UrlList>().getDatesList();
                 final String? urlGoogle = await Api().searchByUrlGoogle(context.read<UrlList>().urlList.last);
                 final String? urlYandex = await Api().searchByUrlYandex(context.read<UrlList>().urlList.last);
                 Navigator.push(context,MaterialPageRoute(builder: (BuildContext context)=>BrowserPage(urlGoogle: urlGoogle,urlYandex: urlYandex,)));
