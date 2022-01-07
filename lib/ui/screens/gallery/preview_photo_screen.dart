@@ -20,6 +20,7 @@ class PreviewPhotoScreen extends StatefulWidget{
 }
 
 class _PreviewPhotoScreenState extends State<PreviewPhotoScreen>{
+  bool flag =true;
   @override
   void initState() {
     super.initState();
@@ -34,11 +35,17 @@ class _PreviewPhotoScreenState extends State<PreviewPhotoScreen>{
         title: 'Gallery',
         backBtn: const IosBackBtn(),
         actions: [
-          TextButton(
+          flag ? TextButton(
               onPressed: () async {
+                setState(() {
+                  flag=false;
+                });
                 await Api().uploadImage(widget.image,context);
                 final String? urlGoogle = await Api().searchByUrlGoogle(context.read<UrlList>().urlList.last);
                 final String? urlYandex = await Api().searchByUrlYandex(context.read<UrlList>().urlList.last);
+                setState(() {
+                  flag=true;
+                });
                 Navigator.push(context,MaterialPageRoute(builder: (BuildContext context)=>BrowserPage(urlGoogle: urlGoogle,urlYandex: urlYandex,)));
               },
               child: const Text(
@@ -48,7 +55,7 @@ class _PreviewPhotoScreenState extends State<PreviewPhotoScreen>{
                     fontSize: 18
                 ),
               )
-          )
+          ) : const Padding(padding: EdgeInsets.only(right: 20),child: CupertinoActivityIndicator(),)
         ],
 
       ),
