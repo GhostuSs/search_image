@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_search_app/ui/components/uikit/ios_back_button.dart';
 import 'package:image_search_app/ui/components/uikit/textfield.dart';
+import 'package:provider/src/provider.dart';
 
+import '../../../data/model/data/subscribe.dart';
 import '../../../project_settings/api/api_controller.dart';
 import '../../../project_settings/api/base_url.dart';
 import '../../../project_settings/api/routes/api_routes.dart';
@@ -50,11 +52,18 @@ class _SearchUrlScreenState extends State<SearchUrlScreen>{
               onChanged: (value){
                 value=searchController.text;
               }, onSearchPressed: () async{
-            final String? urlGoogle = BaseUrl.google+ApiRoutes.searchByImageGoogle+searchController.text;
-              print(urlGoogle);
-              String? urlYandex = await Api().searchByUrlYandex(searchController.text);
-              Navigator.push(context, MaterialPageRoute(builder: (BuildContext ctx)=>BrowserPage(urlGoogle: urlGoogle,urlYandex: urlYandex,)));
-            },
+    final suffix = context.read<Subscribe>();
+    if((suffix.status==false&&suffix.quantities<5)||suffix.status) {
+      final String? urlGoogle = BaseUrl.google + ApiRoutes.searchByImageGoogle +
+          searchController.text;
+      print(urlGoogle);
+      String? urlYandex = await Api().searchByUrlYandex(searchController.text);
+      Navigator.push(context, MaterialPageRoute(builder: (BuildContext ctx) =>
+          BrowserPage(urlGoogle: urlGoogle, urlYandex: urlYandex,)));
+    }else{
+      Navigator.pushNamed(context, '/subscribe');
+    }
+    },
           )
         ],
       ),

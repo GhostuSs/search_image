@@ -7,6 +7,7 @@ import 'package:image_search_app/ui/components/uikit/textfield.dart';
 import 'package:dio/dio.dart';
 import 'package:image_search_app/ui/screens/browser/browser_page.dart';
 import 'package:provider/src/provider.dart';
+import '../../../data/model/data/subscribe.dart';
 import '../../../project_settings/api/api_controller.dart';
 import '../../../project_settings/colors/color_palette.dart';
 
@@ -51,11 +52,21 @@ class _SearchWordsScreenState extends State<SearchWordsScreen>{
               onChanged: (value){
                 value=searchController.text;
               }, onSearchPressed: () async{
-                String? urlGoogle = await Api().searchByWordsGoogle(searchController.text);
-                String? urlYandex = await Api().searchByWordsYandex(searchController.text);
-                await context.read<WordList>().addList(searchController.text);
-                Navigator.push(context, MaterialPageRoute(builder: (BuildContext ctx)=>BrowserPage(urlGoogle: urlGoogle,urlYandex: urlYandex,)));
-          },
+                final suffix = context.read<Subscribe>();
+                if((suffix.status==false&&suffix.quantities<5)||suffix.status) {
+                  String? urlGoogle = await Api().searchByWordsGoogle(
+                      searchController.text);
+                  String? urlYandex = await Api().searchByWordsYandex(
+                      searchController.text);
+                  await context.read<WordList>().addList(searchController.text);
+                  Navigator.push(context, MaterialPageRoute(
+                      builder: (BuildContext ctx) =>
+                          BrowserPage(
+                            urlGoogle: urlGoogle, urlYandex: urlYandex,)));
+                }else{
+                  Navigator.pushNamed(context, '/subscribe');
+                }
+                },
           ),
             ],
       ),
