@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
             onPressedUp: () async {
               final suffix = context.read<Subscribe>();
               await suffix.checkStatus();
-              if(suffix.quantities<5){
+              if((suffix.quantities<5&&suffix.status==false)||suffix.status==true){
                 var picture =
                 await ImagePicker().pickImage(source: ImageSource.gallery);
                 suffix.quantities++;
@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage> {
             onPressedDown: () async {
               final suffix = context.read<Subscribe>();
               await suffix.checkStatus();
-              if(suffix.quantities<5){
+              if((suffix.quantities<5&&suffix.status==false)||suffix.status==true){
                 suffix.quantities++;
                 var picture =
                 await ImagePicker().pickImage(source: ImageSource.camera);
@@ -116,7 +116,7 @@ class _HomePageState extends State<HomePage> {
             onPressedUp: () async {
               final suffix = context.read<Subscribe>();
               await suffix.checkStatus();
-              if(suffix.status && suffix.quantities<5){
+              if((suffix.quantities<5&&suffix.status==false)||suffix.status==true){
                 suffix.quantities++;
                 Navigator.pushNamed(context, MainNavigationRoutes.searchUrl);
               }
@@ -142,7 +142,7 @@ class _HomePageState extends State<HomePage> {
             onPressedUp: () async {
               final suffix = context.read<Subscribe>();
               await suffix.checkStatus();
-              if(suffix.status && suffix.quantities<5) {
+              if((suffix.quantities<5&&suffix.status==false)||suffix.status==true) {
                 Navigator.pushNamed(context, MainNavigationRoutes.searchWords);
                 suffix.quantities++;
               } else {

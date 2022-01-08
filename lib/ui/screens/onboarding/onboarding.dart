@@ -51,8 +51,8 @@ class _OnBoardingScreen extends State<OnBoardingScreen> {
       floatingActionButton: currentIndex==slides.length-1
           ?floatingBtm('Continue',() async {
             final SharedPreferences prefs = await SharedPreferences.getInstance();
-            prefs.setBool('subscribe', true);
-            context.read<Subscribe>().status=await prefs.getBool('subscribe') ?? true;
+            await prefs.setBool('subscribe', true);
+            context.read<Subscribe>().status=prefs.getBool('subscribe') ?? true;
             Navigator.pushNamed(context, '/');
 
             },width,height)

@@ -14,6 +14,7 @@ bool subscribe = false;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.clear();
   seen = prefs.getBool("seen") ?? false;
   await prefs.setBool("seen", true);
   subscribe = prefs.getBool("subscribe") ?? false;
@@ -42,9 +43,25 @@ class _App extends State<App>{
             theme: ThemeData.dark(),
             color: ProjectColors.white,
             debugShowCheckedModeBanner: false,
-            initialRoute: seen ? MainNavigationRoutes.home : MainNavigationRoutes.onboarding ,
+            initialRoute:returnableRoute(seen, subscribe),
             routes: routes
         ));
+  }
+  String returnableRoute(bool seen,bool subscribe){
+    String route=MainNavigationRoutes.onboarding;
+    if(seen&&subscribe){
+      route=MainNavigationRoutes.home;
+    }else{
+      if(!subscribe&&!seen){
+        route=MainNavigationRoutes.onboarding;
+      }else{
+        if(!subscribe&&seen){
+          route=MainNavigationRoutes.subscribe;
+        }
+      }
+    }
+    
+    return route;
   }
 
 }
