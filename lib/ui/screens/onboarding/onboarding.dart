@@ -4,6 +4,10 @@ import 'package:image_search_app/project_settings/colors/color_palette.dart';
 import 'package:image_search_app/ui/components/onboarding/rating_dialog.dart';
 import 'package:image_search_app/ui/components/uikit/button.dart';
 import 'package:image_search_app/ui/components/onboarding/slider_tile.dart';
+import 'package:provider/src/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../data/model/data/subscribe.dart';
 
 class OnBoardingScreen extends StatefulWidget{
   const OnBoardingScreen({Key? key}) : super(key: key);
@@ -33,7 +37,6 @@ class _OnBoardingScreen extends State<OnBoardingScreen> {
       body: Container(
         child: PageView.builder(
             controller: pageController,
-            itemCount: slides.length,
             onPageChanged: (val)=>setState((){currentIndex=val;}),
             itemBuilder: (context,index){
               return SliderTile(
@@ -47,7 +50,13 @@ class _OnBoardingScreen extends State<OnBoardingScreen> {
         ),
       ),
       floatingActionButton: currentIndex==slides.length-1
-          ?floatingBtm('Continue',()=>Navigator.pushNamed(context, '/'),width,height)
+          ?floatingBtm('Continue',() async {
+            final SharedPreferences prefs = await SharedPreferences.getInstance();
+            prefs.setBool('subscribe', true);
+            context.read<Subscribe>().status=await prefs.getBool('subscribe') ?? true;
+            Navigator.pushNamed(context, '/');
+
+            },width,height)
           :floatingBtm('Continue',onContinue,width,height),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
@@ -66,7 +75,7 @@ class _OnBoardingScreen extends State<OnBoardingScreen> {
   }
   Widget floatingBtm(String text,onPressed,width,height){
     return Container(
-      padding: EdgeInsets.symmetric(vertical: height*0.055),
+      padding: EdgeInsets.symmetric(vertical: height<700 ? height*0.033 : height*0.055),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

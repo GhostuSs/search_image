@@ -13,13 +13,13 @@ class IosBackBtn extends StatelessWidget{
         Icon(
           Icons.arrow_back_ios,
           color: CupertinoColors.systemBlue,
-          size: height*0.025,
+          size: height*0.022,
         ),
         Text(
           'Back',
           style: TextStyle(
               color: CupertinoColors.systemBlue,
-            fontSize: height*0.025
+            fontSize: height*0.02
           ),
         )
       ]),

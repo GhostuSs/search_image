@@ -7,6 +7,9 @@ import 'package:image_search_app/routes.dart';
 import 'package:image_search_app/ui/components/uikit/appbar.dart';
 import 'package:image_search_app/ui/components/uikit/settings_card.dart';
 import 'package:image_search_app/ui/screens/gallery/preview_photo_screen.dart';
+import 'package:provider/src/provider.dart';
+
+import '../../data/model/data/subscribe.dart';
 
 class HomePage extends StatefulWidget {
   late final CameraDescription camera;
@@ -26,7 +29,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
-    print(MediaQuery.of(context).size.height);
     return Scaffold(
       backgroundColor: ProjectColors.black,
       appBar: const InnerAppBar(
@@ -47,19 +49,25 @@ class _HomePageState extends State<HomePage> {
             ),
             textUp: 'Photo',
             onPressedUp: () async {
-              var picture =
-                  await ImagePicker().pickImage(source: ImageSource.gallery);
-
-              setState(() {
-                imageFile = picture;
-              });
-              if (imageFile != null) {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => PreviewPhotoScreen(
-                              image: File(imageFile.path),
-                            )));
+              final suffix = context.read<Subscribe>();
+              await suffix.checkStatus();
+              if(suffix.quantities<5){
+                var picture =
+                await ImagePicker().pickImage(source: ImageSource.gallery);
+                suffix.quantities++;
+                setState(() {
+                  imageFile = picture;
+                });
+                if (imageFile != null) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => PreviewPhotoScreen(
+                            image: File(imageFile.path),
+                          )));
+                }
+              }else{
+                null;
               }
             },
             iconDown: const RawIcon(
@@ -68,19 +76,26 @@ class _HomePageState extends State<HomePage> {
             ),
             textDown: 'Camera',
             onPressedDown: () async {
-              var picture =
-                  await ImagePicker().pickImage(source: ImageSource.camera);
+              final suffix = context.read<Subscribe>();
+              await suffix.checkStatus();
+              if(suffix.quantities<5){
+                suffix.quantities++;
+                var picture =
+                await ImagePicker().pickImage(source: ImageSource.camera);
 
-              setState(() {
-                imageFile = picture;
-              });
-              if (imageFile != null) {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => PreviewPhotoScreen(
-                              image: File(imageFile.path),
-                            )));
+                setState(() {
+                  imageFile = picture;
+                });
+                if (imageFile != null) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => PreviewPhotoScreen(
+                            image: File(imageFile.path),
+                          )));
+                }
+              }else{
+                null;
               }
             },
           ),
@@ -98,8 +113,16 @@ class _HomePageState extends State<HomePage> {
             onPressedDown: () {
               Navigator.pushNamed(context, MainNavigationRoutes.historyWords);
             },
-            onPressedUp: () {
-              Navigator.pushNamed(context, MainNavigationRoutes.searchUrl);
+            onPressedUp: () async {
+              final suffix = context.read<Subscribe>();
+              await suffix.checkStatus();
+              if(suffix.status && suffix.quantities<5){
+                suffix.quantities++;
+                Navigator.pushNamed(context, MainNavigationRoutes.searchUrl);
+              }
+              else{
+                null;
+              }
             },
           ),
           RawCard(
@@ -116,8 +139,16 @@ class _HomePageState extends State<HomePage> {
             onPressedDown: () {
               Navigator.pushNamed(context, MainNavigationRoutes.settings);
             },
-            onPressedUp: () {
-              Navigator.pushNamed(context, MainNavigationRoutes.searchWords);
+            onPressedUp: () async {
+              final suffix = context.read<Subscribe>();
+              await suffix.checkStatus();
+              if(suffix.status && suffix.quantities<5) {
+                Navigator.pushNamed(context, MainNavigationRoutes.searchWords);
+                suffix.quantities++;
+              } else {
+                null;
+              }
+
             },
           )
         ],

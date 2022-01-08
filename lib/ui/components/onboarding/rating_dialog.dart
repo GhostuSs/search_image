@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:image_search_app/project_settings/colors/color_palette.dart';
 import 'package:image_search_app/project_settings/images/onboarding.dart';
-import 'package:image_search_app/project_settings/typography/app_typography.dart';
 
 
 class RateMyApp extends StatelessWidget {
@@ -86,7 +85,7 @@ class RateMyApp extends StatelessWidget {
                       Navigator.pop(context);
                     },
                     child: Text(
-                      '        Cancel',
+                      '   Cancel',
                       style: _textStyle,
                     )),
                 Container(
@@ -99,7 +98,7 @@ class RateMyApp extends StatelessWidget {
                       Navigator.pop(context);
                     },
                     child: Text(
-                      'Submit       ',
+                      'Submit   ',
                       style: _textStyle,
                     ))
               ],

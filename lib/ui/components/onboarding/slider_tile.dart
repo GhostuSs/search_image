@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_search_app/project_settings/colors/color_palette.dart';
-import 'package:image_search_app/project_settings/typography/app_typography.dart';
+import 'package:provider/src/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../data/model/data/subscribe.dart';
 
 
 class SliderTile extends StatelessWidget {
@@ -27,7 +30,12 @@ class SliderTile extends StatelessWidget {
                 padding: EdgeInsets.only(
                     right: 20, top: height*0.06),
                 child: InkWell(
-                  onTap: ()=>Navigator.pushNamed(context, '/'),
+                  onTap: () async {
+                    final SharedPreferences prefs = await SharedPreferences.getInstance();
+                    await prefs.setBool('subscribe', false);
+                    context.read<Subscribe>().status = prefs.getBool('subscribe') ?? false;
+                    Navigator.pushNamed(context, '/');
+                  },
                   child: const SizedBox(
                     width: 40,
                     height: 40,
