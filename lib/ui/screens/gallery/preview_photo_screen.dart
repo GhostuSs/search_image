@@ -7,6 +7,7 @@ import 'dart:io';
 import 'package:image_search_app/ui/components/uikit/ios_back_button.dart';
 import 'package:image_search_app/ui/screens/browser/browser_page.dart';
 import 'package:provider/src/provider.dart';
+import '../../../data/model/data/subscribe.dart';
 import '../../../project_settings/api/api_controller.dart';
 import '../../../project_settings/api/base_url.dart';
 import '../../../project_settings/api/routes/api_routes.dart';
@@ -50,7 +51,12 @@ class _PreviewPhotoScreenState extends State<PreviewPhotoScreen>{
                 setState(() {
                   flag=true;
                 });
-                Navigator.push(context,MaterialPageRoute(builder: (BuildContext context)=>BrowserPage(urlGoogle: urlGoogle,urlYandex: urlYandex,)));
+                if(context.read<Subscribe>().quantities<5){
+                  context.read<Subscribe>().quantities++;
+                  Navigator.push(context,MaterialPageRoute(builder: (BuildContext context)=>BrowserPage(urlGoogle: urlGoogle,urlYandex: urlYandex,)));
+                }else{
+                  Navigator.pushNamed(context, '/subscribe');
+                }
               },
               child: Text(
                 'Ok',
