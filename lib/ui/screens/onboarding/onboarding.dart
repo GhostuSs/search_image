@@ -11,7 +11,6 @@ import '../../../data/model/data/subscribe.dart';
 
 class OnBoardingScreen extends StatefulWidget{
   const OnBoardingScreen({Key? key}) : super(key: key);
-
   @override
   State<StatefulWidget> createState() {
     return _OnBoardingScreen();

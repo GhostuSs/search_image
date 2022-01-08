@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> {
                           )));
                 }
               }else{
-                null;
+                Navigator.pushNamed(context, '/subscribe');
               }
             },
             iconDown: const RawIcon(
@@ -95,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                           )));
                 }
               }else{
-                null;
+                Navigator.pushNamed(context, '/subscribe');
               }
             },
           ),
@@ -121,7 +121,7 @@ class _HomePageState extends State<HomePage> {
                 Navigator.pushNamed(context, MainNavigationRoutes.searchUrl);
               }
               else{
-                null;
+                Navigator.pushNamed(context, '/subscribe');
               }
             },
           ),
@@ -146,7 +146,7 @@ class _HomePageState extends State<HomePage> {
                 Navigator.pushNamed(context, MainNavigationRoutes.searchWords);
                 suffix.quantities++;
               } else {
-                null;
+                Navigator.pushNamed(context, '/subscribe');
               }
 
             },
