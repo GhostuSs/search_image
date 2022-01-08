@@ -14,7 +14,6 @@ bool subscribe = false;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  prefs.clear();
   seen = prefs.getBool("seen") ?? false;
   await prefs.setBool("seen", true);
   subscribe = prefs.getBool("subscribe") ?? false;
