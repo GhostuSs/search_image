@@ -53,7 +53,7 @@ class _SearchUrlScreenState extends State<SearchUrlScreen>{
                 value=searchController.text;
               }, onSearchPressed: () async{
     final suffix = context.read<Subscribe>();
-    if((suffix.status==false&&suffix.quantities<5)||suffix.status) {
+    if((suffix.status==false&&suffix.quantities<6)||suffix.status) {
       final String? urlGoogle = BaseUrl.google + ApiRoutes.searchByImageGoogle +
           searchController.text;
       print(urlGoogle);

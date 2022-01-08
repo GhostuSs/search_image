@@ -51,7 +51,7 @@ class _PreviewPhotoScreenState extends State<PreviewPhotoScreen>{
                 setState(() {
                   flag=true;
                 });
-                if(context.read<Subscribe>().quantities<5){
+                if(context.read<Subscribe>().quantities<6){
                   context.read<Subscribe>().quantities++;
                   Navigator.push(context,MaterialPageRoute(builder: (BuildContext context)=>BrowserPage(urlGoogle: urlGoogle,urlYandex: urlYandex,)));
                 }else{

@@ -53,7 +53,7 @@ class _SearchWordsScreenState extends State<SearchWordsScreen>{
                 value=searchController.text;
               }, onSearchPressed: () async{
                 final suffix = context.read<Subscribe>();
-                if((suffix.status==false&&suffix.quantities<5)||suffix.status) {
+                if((suffix.status==false&&suffix.quantities<6)||suffix.status) {
                   String? urlGoogle = await Api().searchByWordsGoogle(
                       searchController.text);
                   String? urlYandex = await Api().searchByWordsYandex(
